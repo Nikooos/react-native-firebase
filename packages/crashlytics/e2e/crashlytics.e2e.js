@@ -94,6 +94,45 @@ describe('crashlytics()', function () {
     });
   });
 
+  describe('setCustomValue()', function () {
+    it('accepts string values', async function () {
+      await firebase.crashlytics().setCustomValue('invertase', '1337');
+    });
+
+    it('rejects none string values', async function () {
+      try {
+        await firebase.crashlytics().setCustomValue('invertase', 33.3333);
+        return Promise.reject(new Error('Did not throw.'));
+      } catch (e) {
+        e.message.should.containEql('must be a string');
+      }
+    });
+
+    it('errors if attribute name is not a string', async function () {
+      try {
+        await firebase.crashlytics().setCustomValue(1337, 'invertase');
+        return Promise.reject(new Error('Did not throw.'));
+      } catch (e) {
+        e.message.should.containEql('must be a string');
+      }
+    });
+  });
+
+  describe('setCustomValues()', function () {
+    it('errors if arg is not an object', async function () {
+      try {
+        await firebase.crashlytics().setCustomValues(1337);
+        return Promise.reject(new Error('Did not throw.'));
+      } catch (e) {
+        e.message.should.containEql('must be an object');
+      }
+    });
+
+    it('accepts string values', async function () {
+      await firebase.crashlytics().setCustomValues({ invertase: '1337' });
+    });
+  });
+
   describe('recordError()', function () {
     it('warns if not an error', async function () {
       const orig = jet.context.console.warn;
