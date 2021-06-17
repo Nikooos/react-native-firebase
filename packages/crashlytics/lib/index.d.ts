@@ -235,6 +235,36 @@ export namespace FirebaseCrashlyticsTypes {
     setAttributes(attributes: { [key: string]: string }): Promise<null>;
 
     /**
+     * Like `setAttribute` but with a name matching the native Crashlytics SDK.
+     *
+     * #### Example
+     *
+     * ```js
+     * await firebase.crashlytics().setCustomKey('role', 'admin');
+     * ```
+     *
+     * @param key A unique key.
+     * @param value A string value to be associated with the given key.
+     */
+     setCustomKey(key: string, value: string): Promise<null>;
+
+     /**
+      * Like `setAttributes` but with a name matching the native Crashlytics SDK.
+      *
+      * #### Example
+      *
+      * ```js
+      * await firebase.crashlytics().setCustomKeys({
+      *   role: 'admin',
+      *   followers: '13',
+      * });
+      * ```
+      *
+      * @param keysAndValues An object of key/value attribute keys and values.
+      */
+      setCustomKeys(keysAndValues: { [key: string]: string }): Promise<null>;
+
+    /**
      * Enable/disable Crashlytics reporting.
      *
      * Use this for opt-in first user data collection flows combined with `firebase.json` settings to disable auto collection.

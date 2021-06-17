@@ -99,6 +99,32 @@ class FirebaseCrashlyticsModule extends FirebaseModule {
     return this.native.setAttributes(object);
   }
 
+  setCustomKey(key, value) {
+    if (!isString(key)) {
+      throw new Error(
+        'firebase.crashlytics().setCustomKey(*, _): The supplied property key must be a string.',
+      );
+    }
+
+    if (!isString(value)) {
+      throw new Error(
+        'firebase.crashlytics().setCustomKey(_, *): The supplied property value must be a string.',
+      );
+    }
+
+    return this.native.setAttribute(key, value);
+  }
+
+  setCustomKeys(object) {
+    if (!isObject(object)) {
+      throw new Error(
+        'firebase.crashlytics().setCustomKeys(*): The supplied arg must be an object of key value strings.',
+      );
+    }
+
+    return this.native.setAttributes(object);
+  }
+
   setUserId(userId) {
     if (!isString(userId)) {
       throw new Error(
